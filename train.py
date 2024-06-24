@@ -1,17 +1,33 @@
 ﻿"Adapted from the code (https://github.com/leena201818/radioml) contributed by leena201818"
-import os,random
-os.environ["KERAS_BACKEND"] = "tensorflow"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+"Adapted from MCLDNN auth. wzjialang"
+#import os,random
+#os.environ["KERAS_BACKEND"] = "tensorflow"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+#import tensorflow as tf
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-import pickle
-import keras
-import keras.backend as K
-from keras.callbacks import LearningRateScheduler
-from keras.regularizers import *
-from keras.optimizers import adam
-from keras.models import model_from_json,Model
+#import matplotlib
+#import matplotlib.pyplot as plt
+#import pickle
+#import keras
+from tensorflow import keras 
+
+#import keras.backend as K
+from keras import backend as K
+
+# from keras.callbacks import LearningRateScheduler
+#from keras import callbacks 
+
+# from keras.regularizers import *
+#from keras  import  regularizers 
+
+# from keras.optimizers import adam
+
+
+# from keras.models import model_from_json,Model
+
+
+
+
 import mltools,dataset2016
 import MCLDNN as mcl
 import argparse
@@ -29,7 +45,7 @@ if __name__ == "__main__":
     
     # Set Keras data format as channels_last
     K.set_image_data_format('channels_last')
-    print(K.image_data_format())
+    print("iamge data format convention: ",K.image_data_format())
 
     (mods,snrs,lbl),(X_train,Y_train),(X_val,Y_val),(X_test,Y_test),(train_idx,val_idx,test_idx) = \
         dataset2016.load_data(opt.datasetpath,opt.data)
