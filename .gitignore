@@ -1,1 +1,4 @@
-.vscode/settings.json
+.vscode/*
+__pychache__/
+datset/
+weights.keras
