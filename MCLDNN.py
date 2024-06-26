@@ -20,7 +20,7 @@ def MCLDNN(weights=None,
 
     dr=0.5
 
-    input1=layers.Input(input_shape1+[1],name='I/Qchannel')
+    input1=layers.Input(input_shape1+[1],name='IQchannel')
     input2=layers.Input(input_shape2,name='Ichannel')
     input3=layers.Input(input_shape2,name='Qchannel')
 
@@ -37,8 +37,8 @@ def MCLDNN(weights=None,
     
     # Part-B: TRemporal Characteristics Extraction Section
     x=layers.Reshape(target_shape=((124,100)))(x)
-    x=layers.CuDNNLSTM(units=128,return_sequences=True,name="LSTM1")(x)
-    x=layers.CuDNNLSTM(units=128,name="LSTM2")(x)
+    x=layers.LSTM(units=128,return_sequences=True,name="LSTM1")(x)
+    x=layers.LSTM(units=128,name="LSTM2")(x)
 
     #DNN
     x=layers.Dense(128,activation="selu",name="FC1")(x)

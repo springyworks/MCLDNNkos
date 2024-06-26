@@ -38,8 +38,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="MCLDNN")
     parser.add_argument("--epoch", type=int, default=10000, help='Max number of training epochs')
     parser.add_argument("--batch_size", type=int, default=400, help="Training batch size")
-    parser.add_argument("--filepath", type=str, default='./weights.h5', help='Path for saving and reloading the weight')
-    parser.add_argument("--datasetpath", type=str, default='./RML2016.10a_dict.pkl', help='Path for the dataset')
+    parser.add_argument("--filepath", type=str, default='./weights.keras', help='Path for saving and reloading the weight')
+    parser.add_argument("--datasetpath", type=str, default='./data/RML/RML2016.10a_dict.pkl', help='Path for the dataset')
     parser.add_argument("--data", type=int, default=0, help='Select the RadioML2016.10a or RadioML2016.10b, 0 or 1')
     opt = parser.parse_args()
     
