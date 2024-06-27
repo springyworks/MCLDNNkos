@@ -36,10 +36,10 @@ def show_history(history):
     np_train_loss=np.array(train_loss)
     np_val_loss=np.array(val_loss)
     np_epoch=np.array(epoch)
-    np.savetxt('train_acc.txt',np_train_acc)
-    np.savetxt('train_loss.txt',np_train_loss)
-    np.savetxt('val_acc.txt',np_val_acc)
-    np.savetxt('val_loss.txt',np_val_loss)
+    np.savetxt('data/texts/train_acc.txt',np_train_acc)
+    np.savetxt('data/texts/train_loss.txt',np_train_loss)
+    np.savetxt('data/texts/val_acc.txt',np_val_acc)
+    np.savetxt('data/texts/val_loss.txt',np_val_loss)
 
 def plot_lstm2layer_output(a,modulation_type=None,save_filename=None):
     plt.figure(figsize=(4,3),dpi=600)
