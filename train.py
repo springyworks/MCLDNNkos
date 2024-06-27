@@ -37,7 +37,7 @@ if __name__ == "__main__":
     
     # Set Keras data format as channels_last
     K.set_image_data_format('channels_last')
-    print("iamge data format convention: ",K.image_data_format())
+    print("image data format convention: ",K.image_data_format())
 
     (mods,snrs,lbl),(X_train,Y_train),(X_val,Y_val),(X_test,Y_test),(train_idx,val_idx,test_idx) = \
         dataset2016.load_data(opt.datasetpath,opt.data)
@@ -76,8 +76,9 @@ if __name__ == "__main__":
         validation_data=([X_val,X1_val,X2_val],Y_val),
         callbacks = [
                     keras.callbacks.ModelCheckpoint(opt.filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='auto'),
-                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patince=5,min_lr=0.0000001),
-                    keras.callbacks.EarlyStopping(monitor='val_loss', patience=60, verbose=1, mode='auto'),           
+                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patience=5,min_lr=0.0000001),
+                    #keras.callbacks.EarlyStopping(monitor='val_loss', patience=60, verbose=1, mode='auto'), 
+                    keras.callbacks.EarlyStopping(monitor='val_loss', patience=6, verbose=1, mode='auto'),           
                     # keras.callbacks.TensorBoard(histogram_freq=1,write_graph=True,write_images=True,batch_size=opt.batch_size)
                     ]
                         )
