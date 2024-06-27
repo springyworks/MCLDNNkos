@@ -1,17 +1,24 @@
 "Adapted from the code (https://github.com/leena201818/radioml) contributed by leena201818"
-import os,random
-os.environ["KERAS_BACKEND"] = "tensorflow"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+#import os,random
+#os.environ["KERAS_BACKEND"] = "tensorflow"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import numpy as np
-import matplotlib
+#import matplotlib
 import matplotlib.pyplot as plt
 import pickle
-import keras
-import keras.backend as K
-from keras.callbacks import LearningRateScheduler
-from keras.regularizers import *
-from keras.optimizers import adam
-from keras.models import Model
+#import keras
+from tensorflow import keras 
+#import keras.backend as K
+from keras import backend as K
+#from keras.callbacks import LearningRateScheduler
+LearningRateScheduler = keras.callbacks.LearningRateScheduler
+
+#from keras.regularizers import *
+from keras import regularizers 
+#from keras.optimizers import adam
+adam = keras.optimizers.Adam
+#from keras.models import Model
+Model = keras.models.Model
 import mltools,dataset2016
 import MCLDNN as mcl
 import argparse
@@ -39,7 +46,7 @@ def predict(model,batch,data,classes):
         test_Y_i_hat = model.predict([test_X_i,test_X1_i,test_X2_i])
         confnorm_i,cor,ncor = mltools.calculate_confusion_matrix(test_Y_i,test_Y_i_hat,classes)
         acc[snr] = 1.0 * cor / (cor + ncor)
-        mltools.plot_confusion_matrix(confnorm_i, labels=classes, title="Confusion Matrix" ,save_filename="figure/Confusion(SNR=%d)(ACC=%2f).png" % (snr,100.0*acc[snr]))
+        mltools.plot_confusion_matrix(confnorm_i, labels=classes, title="Confusion Matrix" ,save_filename="figure/confs/Confusion(SNR=%d)(ACC=%2f).png" % (snr,100.0*acc[snr]))
         acc_mod_snr[:,i] = np.round(np.diag(confnorm_i)/np.sum(confnorm_i,axis=1),3)
         i = i +1
     
@@ -65,8 +72,8 @@ if __name__ == "__main__":
     # Set up some params
     parser = argparse.ArgumentParser(description="MCLDNN_test")
     parser.add_argument("--batch_size", type=int, default=400, help="Training batch size")
-    parser.add_argument("--filepath", type=str, default='./weights.h5', help='Path for saving and reloading the weight')
-    parser.add_argument("--datasetpath", type=str, default='./RML2016.10a_dict.pkl', help='Path for the dataset')
+    parser.add_argument("--filepath", type=str, default='./weights.keras', help='Path for saving and reloading the weight')
+    parser.add_argument("--datasetpath", type=str, default='data/RML//RML2016.10a_dict.pkl', help='Path for the dataset')
     parser.add_argument("--data", type=int, default=0, help='Select the RadioML2016.10a or RadioML2016.10b, 0 or 1')
     opt = parser.parse_args()
 
