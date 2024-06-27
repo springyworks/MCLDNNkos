@@ -15,23 +15,15 @@ from tensorflow import keras
 from keras import backend as K
 
 # from keras.callbacks import LearningRateScheduler
-#from keras import callbacks 
-
+# from keras import callbacks 
 # from keras.regularizers import *
 #from keras  import  regularizers 
-
 # from keras.optimizers import adam
-
-
 # from keras.models import model_from_json,Model
-
-
-
 
 import mltools,dataset2016
 import MCLDNN as mcl
 import argparse
-
 
 if __name__ == "__main__":
     # Set up some params
