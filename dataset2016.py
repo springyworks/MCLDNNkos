@@ -7,7 +7,7 @@ def l2_normalize(x, axis=-1):
 
    
 def load_data(filename,data):
-    # RadioML2016.10a: (220000,2,128), mods*snr*1000, total 220000 samples; 
+    # RadioML2016.10a: (220000,2,128), mods*snr*1000,  total  220000 samples; 
     # RadioML2016.10b: (1200000,2,128), mods*snr*6000, total 1200000 samples;
     Xd =pickle.load(open(filename,'rb'),encoding='iso-8859-1')
     mods,snrs = [sorted(list(set([k[j] for k in Xd.keys()]))) for j in [0,1] ] 

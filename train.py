@@ -76,10 +76,12 @@ if __name__ == "__main__":
         validation_data=([X_val,X1_val,X2_val],Y_val),
         callbacks = [
                     keras.callbacks.ModelCheckpoint(opt.filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='auto'),
-                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patience=5,min_lr=0.0000001),
+                    #keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patience=5,min_lr=0.0000001),
+                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.2,verbose=1,patience=5),
                     #keras.callbacks.EarlyStopping(monitor='val_loss', patience=60, verbose=1, mode='auto'), 
-                    keras.callbacks.EarlyStopping(monitor='val_loss', patience=6, verbose=1, mode='auto'),           
-                    # keras.callbacks.TensorBoard(histogram_freq=1,write_graph=True,write_images=True,batch_size=opt.batch_size)
+                    keras.callbacks.EarlyStopping(monitor='val_loss', patience=40, verbose=1, mode='auto'),           
+                    #keras.callbacks.TensorBoard(histogram_freq=1,write_graph=True,write_images=True)
+                    keras.callbacks.TensorBoard(histogram_freq=1,write_graph=True,write_images=True, embeddings_freq=1)
                     ]
                         )
 

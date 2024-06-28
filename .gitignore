@@ -1,6 +1,7 @@
 .vscode/
 __pycache__/
 data/
+logs/
 weights.keras
 figure/confs/
 predictresult/*.dat

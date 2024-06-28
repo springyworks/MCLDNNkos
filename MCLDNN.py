@@ -5,7 +5,9 @@ from tensorflow import keras
 from keras import models
 # from keras.layers import Input,Dense,Conv1D,Dropout,concatenate,Reshape
 from keras import layers
-# from keras.layers.convolutional import Conv2D
+#from keras.Regulizers import L2
+L1 = keras.regularizers.L1
+L2 = keras.regularizers.L2
 # from keras.layers import CuDNNLSTM
 
 def MCLDNN(weights=None,
@@ -34,17 +36,22 @@ def MCLDNN(weights=None,
     x=layers.Conv2D(50,(1,8), padding='same',activation="relu",name="Conv4",kernel_initializer="glorot_uniform")(x)
     x=layers.concatenate([x1,x],name="Concatenate2")
     x=layers.Conv2D(100,(2,5),padding="valid",activation="relu",name="Conv5",kernel_initializer="glorot_uniform")(x)
-    
-    # Part-B: TRemporal Characteristics Extraction Section
-    x=layers.Reshape(target_shape=((124,100)))(x)
+    #x=layers.Conv2D(100,(2,5),padding="valid",activation="relu",kernel_regularizer=L1(0.0001),name="Conv5_reg",kernel_initializer="glorot_uniform")(x)
+
+    # Part-B: Temporal Characteristics Extraction Section
+    x=layers.Reshape(target_shape=(124,100))(x)
     x=layers.LSTM(units=128,return_sequences=True,name="LSTM1")(x)
     x=layers.LSTM(units=128,name="LSTM2")(x)
 
     #DNN
     x=layers.Dense(128,activation="selu",name="FC1")(x)
+    #x=layers.Dense(128, activation="selu", kernel_regularizer=L1(0.0001), name="FC1_reg")(x)
     x=layers.Dropout(dr)(x)
+    
     x=layers.Dense(128,activation="selu",name="FC2")(x)
+    #x=layers.Dense(128, activation="selu", kernel_regularizer=L2(0.0001), name="FC2_reg")(x)
     x=layers.Dropout(dr)(x)
+    
     x=layers.Dense(classes,activation="softmax",name="Softmax")(x)
 
     model=models.Model(inputs=[input1,input2,input3],outputs=x)
